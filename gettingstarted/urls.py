@@ -12,6 +12,11 @@ import hello.views
 
 urlpatterns = [
     url(r'^$', hello.views.index, name='index'),
+    url(r'^databases/(?P<pk>\d+)/$', hello.views.comp_tables,
+            name = 'comp_tables'),
+    url(r'^databases/(?P<pk>\d+)/new$',hello.views.create_submission,
+            name = 'create_submission'),
     url(r'^db', hello.views.db, name='db'),
+
     path('admin/', admin.site.urls),
 ]
