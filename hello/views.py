@@ -4,7 +4,8 @@ from django.http import HttpResponse
 from django.http import Http404
 from django.contrib.auth.models import User
 from django.conf import settings
-
+from django.contrib.auth.decorators import login_required
+from django.core.files.storage import FileSystemStorage
 
 from .models import Data_Type_Collection as cdb
 from .models import Active_Group, Submissions
@@ -13,22 +14,34 @@ from .models import Greeting
 
 
 # Create your views here.
+
+@login_required
 def index(request):
     databases = cdb.objects.all()
     return render(request, 'home.html',{'databases':databases})
 
+@login_required
 def comp_tables(request, pk):
     database = get_object_or_404(cdb,pk=pk)
     return render(request,'table.html',{'database':database})
 
-def file_upload(request):
-    save_path = os.path.join(settings.MEDIA_ROOT, 'uploads', request.FILES['test_file'])
-    path = default_storage.save(save_path, request.FILES['test_file'])
-    return default_storage.path(path)
+def simple_upload(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        return render(request, 'simple_upload.html', {
+            'uploaded_file_url': uploaded_file_url
+        })
+    return render(request, 'simple_upload.html')
 
+
+
+@login_required
 def create_submission(request, pk):
     database = get_object_or_404(cdb, pk=pk)
-    user = User.objects.first()  #TODO make user auth
+    user = request.user
     if request.method == 'POST':
         form = NewGroupForm(request.POST,request.FILES)
         if form.is_valid():
@@ -39,9 +52,20 @@ def create_submission(request, pk):
             group.authorized_contributors = user
             group.save()
 
+            data_file = request.FILES['link_of_data']
+            metadata_file = request.FILES['link_of_metadata']
+            fs = FileSystemStorage()
+            data_filename = fs.save(data_file.name,data_file)
+            metadata_filename = fs.save(metadata_file.name,metadata_file)
+
+            data_uploaded_file_url = fs.url(data_filename)
+            metadata_uploaded_file_url = fs.url(metadata_filename)
+
             submission = Submissions.objects.create(
-                link_of_data = request.FILES['link_of_data'].name,
-                link_of_metadata = request.FILES['link_of_metadata'].name,
+                link_of_data = data_uploaded_file_url,
+                link_of_metadata = metadata_uploaded_file_url,
+                data_name =  request.FILES['link_of_data'].name,
+                metadata_name = request.FILES['link_of_metadata'].name,
                 created_by = user,
                 group = group,
                 database = database

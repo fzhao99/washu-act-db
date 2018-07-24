@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ database.name }} - {{ block.super}}
+{% endblock %}
+
+{% block breadcrumb%}
+<li class="breadcrumb-item active">{{ database.name }}</li>
+{% endblock %}
+
+{% block content%}
+<ol class="breadcrumb my-4">
+  <li class="breadcrumb-item"><a href="{% url 'index' %}">Databases</a></li>
+  <li class="breadcrumb-item active">{{ database.name }}</li>
+</ol>
+
+<div class="mb-4">
+   <a href="{% url 'create_submission' database.pk %}" class="btn btn-primary">
+     New submission</a>
+ </div>
+
+ <table class = "table">
+   <thread class = "thread-inverse">
+   <tr>
+     <th> Group </th>
+     <th> Data Link </th>
+     <th> Metadata Link </th>
+   </tr>
+   <tbody>
+     {% for submission in database.submissions.all %}
+       <tr>
+
+         <td>{{submission.group.name}}</td>
+         <td><a href="{{submission.link_of_data}}">{{submission.data_name}}</a></td>
+         <td><a href="{{submission.link_of_data}}">{{submission.metadata_name}}</a></td>
+         <td>{{submission.views}}</td>
+
+       </tr>
+     {% endfor %}
+ </tbody>
+ </table>
+
+<!-- <table class = "table">
+  <thread class = "thread-inverse">
+  {% for submission in database.table.all %}
+    <tr>
+      <td>submission.group_of_submission</td>
+      <td>Placeholder Description</td>
+      <td>Placeholder Link</td>
+      <td>submission.rows_of_data</td>
+    </tr>
+  {% endfor %}
+</thread>
+
+</table> -->
+{% endblock %}

@@ -29,6 +29,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Application definition
 
@@ -126,11 +128,20 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_DIRS =[
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static'),
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 django_heroku.settings(locals())
 
+LOGOUT_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'index'
 
 db_from_env = dj_database_url.config(conn_max_age=500, ssl_require=True)
 DATABASES['default'].update(db_from_env)
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+LOGIN_URL = 'login'

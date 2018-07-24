@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Database Home
+{% endblock %}
+{% block breadcrumb%}
+<li class="breadcrumb-item active">Databases</li>
+{% endblock %}
+
+{% block content %}
+
+<table class = "table">
+  <thead class = "thread-inverse">
+    <tr>
+      <th>Database</th>
+      <th>Submissions</th>
+      <th>Last Accepted Update</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for database in databases %}
+      <tr>
+        <td>
+          <a href="{% url 'comp_tables' database.pk %}" target="_blank">{{ database.name }}</a><br>
+        </td>
+         <td class="align-middle">{{database.get_posts_count}}</td>
+         <td class="align-middle">
+               {% with submission=database.get_first_post %}
+               {% if submission %}
+                 <small>
+                     By {{ submission.group.name }} at {{ submission.created_at }}
+                   </a>
+                 </small>
+                 {% else %}
+                    <small class="text-muted">
+                      <em>No submissions yet.</em>
+                    </small>
+                  {% endif %}
+               {% endwith %}
+             </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
