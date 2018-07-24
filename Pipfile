@@ -9,6 +9,7 @@ gunicorn = "*"
 psycopg2 = "*"
 whitenoise = "*"
 django-widget-tweaks = "*"
+requests = "*"
 
 [requires]
 python_version = "3.6"
