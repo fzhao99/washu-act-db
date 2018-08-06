@@ -17,10 +17,10 @@ def change_submission_modify(modeladmin, request, queryset):
 change_submission_modify.short_description = "Deny submission and request modification"
 
 class SubmissionAdmin(admin.ModelAdmin):
-    list_display = ['group','link_of_data', 'link_of_metadata','comment_file','status']
+    list_display = ['group','database','link_of_data', 'link_of_metadata',
+            'comment_file','status']
     ordering = ['group','link_of_data','link_of_metadata','comment_file']
     actions = [change_submission_accept,change_submission_deny,change_submission_modify]
-
 
 admin.site.register(cdb)
 admin.site.register(Submissions, SubmissionAdmin)

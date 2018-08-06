@@ -14,11 +14,11 @@ import os
 
 class DatabaseTests(TestCase):
     def setUp(self):
-        cdb.objects.create(name='AMS Database2',description = 'Aerodyne AMS',
-                num_tables = 2, admins='admin')
         self.client = Client()
-        User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword')
-        self.client.login(username='john', password='johnpassword')
+        User.objects.create_user('admin', 'lennon@thebeatles.com', 'johnpassword')
+        self.client.login(username='admin', password='johnpassword')
+        cdb.objects.create(name='AMS Database2',description = 'Aerodyne AMS' )
+
     #check if status code returns 200 (found) for given creation
     def test_database_topics_view_success_status_code(self):
         url = reverse('comp_tables', kwargs={'pk': 1})

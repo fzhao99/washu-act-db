@@ -15,7 +15,6 @@ def get_admin():
 class Data_Type_Collection(models.Model):
     name = models.CharField(max_length=30, unique = True)
     description = models.CharField(max_length=100)
-    num_tables = models.IntegerField()
     last_post = models.DateTimeField(null=True)
     admins = models.ManyToManyField(User, default = get_admin, related_name = "db_admins")
     authorized_contributors = models.ManyToManyField(User, default = get_all_users,
@@ -36,7 +35,6 @@ class Data_Type_Collection(models.Model):
         ordered_subs= filter_subs.order_by('status','-created_at')
         first_post = ordered_subs.first()
         return first_post
-
 
 class Active_Group(models.Model):
     name = models.CharField(max_length=30)

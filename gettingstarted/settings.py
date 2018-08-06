@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'hello',
     'widget_tweaks',
     'accounts'
-
 ]
 
 MIDDLEWARE = [
