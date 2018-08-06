@@ -10,7 +10,7 @@ class Greeting(models.Model):
 def get_all_users():
     return User.objects.all()
 def get_admin():
-    return User.objcets.get(username = 'admin')
+    return User.objects.get(username = 'admin')
 
 class Data_Type_Collection(models.Model):
     name = models.CharField(max_length=30, unique = True)
