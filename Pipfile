@@ -16,6 +16,8 @@ idna= "*"
 urllib3= "*"
 whitenoise= "*"
 
-
 [requires]
 python_version = "3.6"
+
+[dev-packages]
+hello = {editable = true, path = "."}
