@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block breadcrumb%}
+<li class="breadcrumb-item"><a href="{% url 'index' %}">Databases</a></li>
+<li class="breadcrumb-item"><a href="{% url 'comp_tables' database.pk %}">{{ database.name }}</a></li>
+<li class="breadcrumb-item"><a href="{% url 'create_submission' database.pk %}">New Submission</a></li>
+<li class="breadcrumb-item active">Submission Successful</li>
+{% endblock %}
+
+
+{% block content %}
+
+<div class = "container">
+  <h1> Submission successful!</h1>
+  <p> Your submission was sent for approval, which should be reviewed within
+    three days. Check your messages after that time for an update on the status of your
+    submission. Please contact the site admin if you have any questions.</p>
+    <a href = "{% url 'index' %}" align="center" class="btn btn-success">Return Home</a>
+
+</div>
+
+{% endblock %}

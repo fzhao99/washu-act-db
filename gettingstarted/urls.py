@@ -15,7 +15,7 @@ from hello import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^databases/(?P<pk>\d+)/$', views.comp_tables,
+    url(r'^databases/(?P<pk>\d+)/$', views.SubmissionListView.as_view(),
             name = 'comp_tables'),
     url(r'^databases/(?P<pk>\d+)/new$',views.create_submission,
             name = 'create_submission'),
@@ -44,6 +44,9 @@ urlpatterns = [
     url(r'^settings/password/done/$', auth_views.PasswordChangeDoneView.as_view(template_name='password_change_done.html'),
         name='password_change_done'),
     url(r'^upload/$', views.simple_upload, name='upload'),
+    url(r'^upload/(?P<pk>\d+)/successful$', views.upload_success, name='upload_success'),
+    url(r'^about/', views.about, name='about'),
+    url(r'^settings/account/$', account_views.UserUpdateView.as_view(), name = 'account_settings'),
 
     path('admin/', admin.site.urls),
 ]

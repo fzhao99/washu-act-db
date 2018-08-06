@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block title %}
 Database Home
 {% endblock %}
@@ -19,17 +18,19 @@ Database Home
   </thead>
   <tbody>
     {% for database in databases %}
+      {% if current_user in database.authorized_contributors.all %}
+
       <tr>
         <td>
-          <a href="{% url 'comp_tables' database.pk %}" target="_blank">{{ database.name }}</a><br>
+          <a href="{% url 'comp_tables' database.pk %}" >{{ database.name }}</a><br>
         </td>
-         <td class="align-middle">{{database.get_posts_count}}</td>
+
+         <td class="align-middle">{{database.get_accepted_posts_count}}</td>
          <td class="align-middle">
-               {% with submission=database.get_first_post %}
-               {% if submission %}
+               {% with submission=database.get_first_accepted_post %}
+               {% if submission.status == "a" %}
                  <small>
                      By {{ submission.group.name }} at {{ submission.created_at }}
-                   </a>
                  </small>
                  {% else %}
                     <small class="text-muted">
@@ -39,6 +40,7 @@ Database Home
                {% endwith %}
              </td>
       </tr>
+        {% endif %}
     {% endfor %}
   </tbody>
 </table>

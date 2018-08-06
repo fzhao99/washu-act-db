@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "74d01ccd75b79bcd36a9580e7bd6991c91b7c771b212ddb59a6494b59de5ded9"
+            "sha256": "ca1d8a6e1b6551bce897d889e5df71937e0fc24628ecdf8bc6a107dab7a59b05"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -38,10 +38,17 @@
         },
         "django": {
             "hashes": [
-                "sha256:97886b8a13bbc33bfeba2ff133035d3eca014e2309dff2b6da0bdfc0b8656613",
-                "sha256:e900b73beee8977c7b887d90c6c57d68af10066b9dac898e1eaf0f82313de334"
+                "sha256:7f246078d5a546f63c28fc03ce71f4d7a23677ce42109219c24c9ffb28416137",
+                "sha256:ea50d85709708621d956187c6b61d9f9ce155007b496dd914fdb35db8d790aec"
             ],
-            "version": "==2.0.7"
+            "version": "==2.1"
+        },
+        "django-heroku": {
+            "hashes": [
+                "sha256:2bc690aab89eedbe01311752320a9a12e7548e3b0ed102681acc5736a41a4762",
+                "sha256:6af4bc3ae4a9b55eaad6dbe5164918982d2762661aebc9f83d9fa49f6009514e"
+            ],
+            "version": "==0.3.1"
         },
         "django-widget-tweaks": {
             "hashes": [
@@ -118,7 +125,6 @@
                 "sha256:a68ac5e15e76e7e5dd2b8f94007233e01effe3e50e8daddf69acfd81cb686baf",
                 "sha256:b5725a0bd4ba422ab0e66e89e030c806576753ea3ee08554382c14e685d117b5"
             ],
-            "markers": "python_version != '3.3.*' and python_version != '3.0.*' and python_version >= '2.6' and python_version != '3.1.*' and python_version < '4' and python_version != '3.2.*'",
             "version": "==1.23"
         },
         "whitenoise": {

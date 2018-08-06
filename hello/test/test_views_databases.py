@@ -35,7 +35,7 @@ class DatabaseTests(TestCase):
     #and checking to make sure the function called was correct
     def test_database_topics_url_resolves_database_topics_view(self):
         view = resolve('/databases/1/')
-        self.assertEquals(view.func, comp_tables)
+        self.assertEquals(view.func.view_class, SubmissionListView)
 
     def test_db_topics_view_contains_navigation_links(self):
         table_url = reverse('comp_tables', kwargs={'pk': 1})

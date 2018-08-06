@@ -7,47 +7,57 @@ import os
 class Greeting(models.Model):
     when = models.DateTimeField('date created', auto_now_add=True)
 
+def get_all_users():
+    return User.objects.all()
+def get_admin():
+    return User.objcets.get(username = 'admin')
+
 class Data_Type_Collection(models.Model):
     name = models.CharField(max_length=30, unique = True)
     description = models.CharField(max_length=100)
     num_tables = models.IntegerField()
     last_post = models.DateTimeField(null=True)
-    admins = models.CharField(max_length=30)
-
+    admins = models.ManyToManyField(User, default = get_admin, related_name = "db_admins")
+    authorized_contributors = models.ManyToManyField(User, default = get_all_users,
+            related_name = "auth_contributors")
     def __str__(self):
         return self.name
 
-    def get_posts_count(self):
+    def get_accepted_posts_count(self):
         filter_subs = Submissions.objects.filter(group__database=self)
-        return filter_subs.count()
+        accepted_subs = 0
+        for sub in filter_subs:
+            if sub.status == 'a':
+                accepted_subs += 1
+        return accepted_subs
 
-    def get_first_post(self):
+    def get_first_accepted_post(self):
         filter_subs = Submissions.objects.filter(group__database=self)
-        ordered_subs= filter_subs.order_by('-created_at')
+        ordered_subs= filter_subs.order_by('status','-created_at')
         first_post = ordered_subs.first()
         return first_post
 
 
 class Active_Group(models.Model):
     name = models.CharField(max_length=30)
-    authorized_contributors= models.ForeignKey(User, related_name='auth_user',
+    authorized_contributors= models.ForeignKey(User, related_name='auth_members',
             on_delete = models.CASCADE,)
     database = models.ForeignKey('Data_Type_Collection', related_name='groups',
             on_delete = models.CASCADE,)
 
     def __str__(self):
         return self.name
-
 STATUS_CHOICES=(
     ('s', 'Submitted for Approval'),
     ('a', 'Accepted'),
     ('d', 'Denied'),
     ('m', 'Subject to Modification')
-
 )
+
 class Submissions(models.Model):
     link_of_data = models.FileField(upload_to='testfiles/')
     link_of_metadata = models.FileField(upload_to='testfiles/')
+    comment_file = models.FileField(upload_to='testfiles/')
     data_name = models.CharField(max_length=100)
     metadata_name = models.CharField(max_length=100)
     database = models.ForeignKey('Data_Type_Collection', related_name='submissions',

@@ -7,9 +7,15 @@ dj-database-url = "*"
 django = "*"
 gunicorn = "*"
 psycopg2 = "*"
-whitenoise = "*"
 django-widget-tweaks = "*"
 requests = "*"
+certifi= "*"
+chardet= "*"
+django-heroku= "*"
+idna= "*"
+urllib3= "*"
+whitenoise= "*"
+
 
 [requires]
 python_version = "3.6"

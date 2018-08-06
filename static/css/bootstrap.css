@@ -58,6 +58,8 @@ article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, s
   display: block;
 }
 
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -160,6 +162,7 @@ sup {
   top: -.5em;
 }
 
+
 a {
   color: #007bff;
   text-decoration: none;
@@ -185,7 +188,6 @@ a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {
 a:not([href]):not([tabindex]):focus {
   outline: 0;
 }
-
 pre,
 code,
 kbd,

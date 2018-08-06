@@ -8,7 +8,7 @@ class NewGroupForm(forms.ModelForm):
     link_of_data = forms.FileField(label = "File Containing Data", help_text="Submit Igor Binary or CSV with Data")
     link_of_metadata = forms.FileField(label = "File Containing Metadata",
             help_text=mark_safe('Submit Igor Binary or CSV with Metadata. See <a href="http://cires1.colorado.edu/jimenez-group/AMSsd/"" target="_blank">original database</a> for citation examples'))
-
+    comment_file = forms.FileField(label = "File with additional comments", help_text =" Submit text file with any additional comments. Not required", required=False)
     class Meta:
         model = Active_Group
         labels = {

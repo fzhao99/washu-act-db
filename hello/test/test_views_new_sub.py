@@ -8,6 +8,7 @@ from ..views import *
 
 from ..models import Data_Type_Collection as cdb
 from ..models import Active_Group, Submissions
+from django.core import mail
 
 import os
 
@@ -100,6 +101,15 @@ class NewGroupsTest(TestCase):
         form = response.context.get('form')
         self.assertEquals(response.status_code, 200)
         self.assertTrue(form.errors)
+
+    def test_new_submission_email_send(self):
+        url = reverse('upload_success',kwargs = {'pk':1})
+        response = self.client.get(url)
+        self.assertEqual(len(mail.outbox),1)
+        self.assertEqual(mail.outbox[0].subject,"[Django] New Submission")
+        self.assertEqual(mail.outbox[0].body,"A new submission has been uploaded. "
+                        "Please visit the admin pannel to process the request.")
+
 
 class LoginRequiredNewTopicTests(TestCase):
     def setUp(self):
