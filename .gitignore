@@ -5,5 +5,3 @@ staticfiles
 db.sqlite3
 
 *.sqlite3
-
-hello/migrations/00*
