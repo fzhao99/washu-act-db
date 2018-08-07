@@ -31,6 +31,15 @@ hello/migrations/0003_auto_20180730_1541.py
 hello/migrations/0004_auto_20180801_1107.py
 hello/migrations/0005_auto_20180801_1119.py
 hello/migrations/0006_auto_20180801_1203.py
+hello/migrations/0007_remove_data_type_collection_num_tables.py
+hello/migrations/0008_auto_20180806_1340.py
+hello/migrations/0009_data_type_collection_admins.py
+hello/migrations/0010_auto_20180806_1342.py
+hello/migrations/0011_data_type_collection_admins.py
+hello/migrations/0012_auto_20180806_1355.py
+hello/migrations/0013_auto_20180807_0136.py
+hello/migrations/0014_auto_20180807_0143.py
+hello/migrations/0015_auto_20180807_0148.py
 hello/migrations/__init__.py
 hello/templatetags/__init__.py
 hello/templatetags/form_tags.py
