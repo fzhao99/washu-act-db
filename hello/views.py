@@ -41,7 +41,6 @@ class SubmissionListView(ListView):
 def upload_success(request,pk):
     database = get_object_or_404(cdb,pk=pk)
             # email admins of a new submission
-
     mail_admins("New Submission","A new submission has been uploaded. "
                 "Please visit the admin pannel to process the request.")
 
