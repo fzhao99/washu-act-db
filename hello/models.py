@@ -10,7 +10,13 @@ class Greeting(models.Model):
 def get_all_users():
     return User.objects.all()
 def get_admin():
-    return User.objects.get(username = 'admin')
+    superusers = []
+    for user in User.objects.all():
+        if user.is_superuser:
+            superusers.append(user)
+    return superusers
+    
+
 
 class Data_Type_Collection(models.Model):
     name = models.CharField(max_length=30, unique = True)
