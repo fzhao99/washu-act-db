@@ -144,8 +144,7 @@ E
 MAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
 EMAIL_HOST = config('EMAIL_HOST', default='smtp.mailgun.org')
 EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
-EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='postmaster@mg.stark-beach-60282.herokuapp.com
-')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='postmaster@mg.stark-beach-60282.herokuapp.com')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='c5b0f7e8b3ad3218c2d9084e532d71c6-7efe8d73-31c2dd18')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
 
