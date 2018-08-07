@@ -140,8 +140,7 @@ LOGIN_REDIRECT_URL = 'index'
 
 db_from_env = dj_database_url.config(conn_max_age=500, ssl_require=True)
 DATABASES['default'].update(db_from_env)
-E
-MAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
+EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
 EMAIL_HOST = config('EMAIL_HOST', default='smtp.mailgun.org')
 EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='postmaster@mg.stark-beach-60282.herokuapp.com')
