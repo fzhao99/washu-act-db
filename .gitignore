@@ -6,4 +6,5 @@ db.sqlite3
 
 *.sqlite3
 
-hello/migrations/00*
+hello/migrations/00**
+!hello/migrations/0015_auto_20180807_0148.py
