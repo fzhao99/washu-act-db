@@ -39,8 +39,8 @@ class NewDatabaseRequestForm(forms.ModelForm):
             'authorized_contributors': _('Enter the usernames for the proposed contributors. '
                     'Hold down "Control", or "Command" on a Mac, to select more than one.'),
             "public":_("If selected, the database will be available to all users"
-                    " who have login credentials. Please 1) Leave the box unselected "
-                    " 2) email the admin with a list of the email addresses you "
-                    " wish to have access if you don't wish for this to be case.")
+                    " who have login credentials. If you don't wish for this to be case, please "
+                    "1) Leave the box unselected 2) email the admin with a list of the email addresses you "
+                    "wish to have access.")
         }
         fields = ['name', 'description','public']
