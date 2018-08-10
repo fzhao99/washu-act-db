@@ -22,5 +22,6 @@ class SubmissionAdmin(admin.ModelAdmin):
     ordering = ['group','link_of_data','link_of_metadata','comment_file']
     actions = [change_submission_accept,change_submission_deny,change_submission_modify]
 
+
 admin.site.register(cdb)
 admin.site.register(Submissions, SubmissionAdmin)

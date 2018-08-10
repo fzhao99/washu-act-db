@@ -47,7 +47,8 @@ urlpatterns = [
     url(r'^upload/(?P<pk>\d+)/successful$', views.upload_success, name='upload_success'),
     url(r'^about/', views.about, name='about'),
     url(r'^settings/account/$', account_views.UserUpdateView.as_view(), name = 'account_settings'),
-
+    url(r'^signup/request_successful/', account_views.signup_success, name = 'signup_success'),
+    url(r'^database_request/',views.new_database_request,name = "new_db"),
     path('admin/', admin.site.urls),
 ]
 

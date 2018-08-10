@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.utils import timezone
 
 import os
@@ -15,14 +15,21 @@ def get_admin():
         if user.is_superuser:
             superusers.append(user)
     return superusers
-    
 
+STATUS_CHOICES=(
+    ('s', 'Submitted for Approval'),
+    ('a', 'Accepted'),
+    ('d', 'Denied'),
+    ('m', 'Subject to Modification')
+)
 
 class Data_Type_Collection(models.Model):
     name = models.CharField(max_length=30, unique = True)
     description = models.CharField(max_length=100)
     last_post = models.DateTimeField(null=True)
     admins = models.ManyToManyField(User, default = get_admin, related_name = "db_admins")
+    public = models.BooleanField(default = True)
+    status = models.CharField(max_length=1, choices = STATUS_CHOICES, default='s')
     authorized_contributors = models.ManyToManyField(User, default = get_all_users,
             related_name = "auth_contributors")
     def __str__(self):
@@ -51,12 +58,7 @@ class Active_Group(models.Model):
 
     def __str__(self):
         return self.name
-STATUS_CHOICES=(
-    ('s', 'Submitted for Approval'),
-    ('a', 'Accepted'),
-    ('d', 'Denied'),
-    ('m', 'Subject to Modification')
-)
+
 
 class Submissions(models.Model):
     link_of_data = models.FileField(upload_to='testfiles/')

@@ -17,11 +17,13 @@ from django.views.generic import UpdateView
 
 from .models import Data_Type_Collection as cdb
 from .models import Active_Group, Submissions
-from .forms import NewGroupForm
+from .forms import NewGroupForm, NewDatabaseRequestForm
 from .models import Greeting
-
+from .decorators import user_has_permissions
 # Create your views here.
 
+
+@method_decorator(user_has_permissions, name = 'dispatch')
 class SubmissionListView(ListView):
     model = Submissions
     context_object_name = 'submissions'
@@ -37,6 +39,19 @@ class SubmissionListView(ListView):
         queryset = self.database.submissions.order_by('-updated_at').annotate(replies = Count('link_of_data') - 1)
         return queryset
 
+@login_required
+def new_database_request(request):
+    if request.method == "POST":
+        form = NewDatabaseRequestForm(request.POST)
+        if form.is_valid():
+            new_database = form.save()
+            mail_admins("New Submission","A new submission has been uploaded. "
+                        "Please visit the admin pannel to process the request.")
+            return render(request, 'request_success.html')
+
+    else:
+        form = NewDatabaseRequestForm()
+    return render(request, 'new_db_request.html', {'form':form})
 
 def upload_success(request,pk):
     database = get_object_or_404(cdb,pk=pk)
@@ -67,6 +82,7 @@ def about(request):
     return render(request,'about.html')
 
 @login_required
+@user_has_permissions
 def create_submission(request, pk):
     database = get_object_or_404(cdb, pk=pk)
     user = request.user

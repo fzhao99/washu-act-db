@@ -19,7 +19,7 @@ Database Home
   <tbody>
     {% for database in databases %}
       {% if current_user in database.authorized_contributors.all %}
-
+        {% if database.status == "a"%}
       <tr>
         <td>
           <a href="{% url 'comp_tables' database.pk %}" >{{ database.name }}</a><br>
@@ -41,8 +41,14 @@ Database Home
              </td>
       </tr>
         {% endif %}
+        {%endif%}
     {% endfor %}
+
   </tbody>
 </table>
+
+
+    <a href="{% url 'new_db' %}" class="btn btn-primary">
+     Request new database</a>
 
 {% endblock %}

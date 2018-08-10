@@ -1,5 +1,5 @@
 from django import forms
-from .models import Active_Group, Submissions
+from .models import Active_Group, Submissions, Data_Type_Collection
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
@@ -23,3 +23,24 @@ class SubmissionForm(forms.ModelForm):
     class Meta:
         model = Submissions
         fields = ['link_of_data', ]
+
+class NewDatabaseRequestForm(forms.ModelForm):
+
+    class Meta:
+        model = Data_Type_Collection
+        labels = {
+            "name": _("Proposed Name"),
+            "description": _("Description"),
+            "authorized_contributors": _("Authorized Contributors"),
+            "public":_("Public"),
+        }
+        help_texts = {
+            'description': _('Description of what the database will be used for.'),
+            'authorized_contributors': _('Enter the usernames for the proposed contributors. '
+                    'Hold down "Control", or "Command" on a Mac, to select more than one.'),
+            "public":_("If selected, the database will be available to all users"
+                    " who have login credentials. Please 1) Leave the box unselected "
+                    " 2) email the admin with a list of the email addresses you "
+                    " wish to have access if you don't wish for this to be case.")
+        }
+        fields = ['name', 'description','public']
