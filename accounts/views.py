@@ -58,7 +58,7 @@ def email_admins():
 
 @receiver(pre_save, sender = User)
 def signup_success( sender, instance, **kwargs):
-    if instance._state.adding:
+    if instance._state.adding and (not instance.is_superuser):
         instance.is_active = False
 
     else:
